@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Envato Batch</title>
+  <style>
+    :root {
+      --bg: #0f0f1a;
+      --card: #1a1b2e;
+      --accent: #7c3aed;
+      --accent-dark: #5b21b6;
+      --text: #e0e0ff;
+      --border: #333366;
+      --success: #10b981;
+      --error: #ef4444;
+      --muted: #a0a0ff;
+    }
+    body {
+      margin: 0;
+      font-family: system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-width: 320px;
+      padding: 16px;
+      box-sizing: border-box;
+    }
+    h1 { margin: 0 0 16px; font-size: 1.4rem; color: white; }
+    label { display: block; margin: 12px 0 4px; font-size: 0.9rem; color: var(--muted); }
+    input, select, textarea {
+      width: 100%;
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: var(--card);
+      color: white;
+      font-size: 0.95rem;
+      box-sizing: border-box;
+    }
+    textarea { resize: vertical; min-height: 120px; }
+    .checkbox-group { display: flex; gap: 16px; margin: 12px 0; }
+    button {
+      margin-top: 8px;
+      padding: 10px 16px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    button:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(124,58,237,0.4); }
+    .upload-group { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+    .upload-btn { background: var(--card); border: 1px solid var(--border); color: var(--muted); }
+    .file-name { font-size: 0.85rem; color: var(--muted); max-width: 180px; overflow: hidden; text-overflow: ellipsis; }
+    #prompts-list-container {
+      margin-top: 16px;
+      padding: 12px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      max-height: 180px;
+      overflow-y: auto;
+    }
+    #prompts-list {
+      margin: 0;
+      padding-left: 20px;
+      list-style-type: decimal;
+      font-size: 0.9rem;
+      color: #d0d0ff;
+    }
+    #prompts-list li { margin-bottom: 6px; word-break: break-word; }
+    #status, #batch-status {
+      margin-top: 16px;
+      padding: 10px;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      background: rgba(124,58,237,0.08);
+      border: 1px solid var(--border);
+    }
+    #batch-status.running { background: rgba(16,185,129,0.12); }
+    #batch-status.error { background: rgba(239,68,68,0.12); color: var(--error); }
+    #controls {
+      display: flex;
+      gap: 10px;
+      margin: 20px 0;
+      flex-wrap: wrap;
+    }
+    #controls button {
+      flex: 1 1 auto;
+      margin-top: 0;
+    }
+    #controls button.stop {
+      background: #ef4444;
+    }
+  </style>
+</head>
+<body>
+  <h1>Envato VideoGen Batch</h1>
+
+  <label>Aspect Ratio</label>
+  <select id="aspect">
+    <option value="16:9">16:9</option>
+    <option value="9:16">9:16</option>
+  </select>
+
+  <div class="checkbox-group">
+    <div><input type="checkbox" id="sound" checked /><label for="sound" style="display:inline; margin:0 0 0 6px;">Sound</label></div>
+    <div><input type="checkbox" id="speech" checked /><label for="speech" style="display:inline; margin:0 0 0 6px;">Speech</label></div>
+  </div>
+
+  <label>Delay between generations (seconds)</label>
+  <input type="number" id="delay" value="90" min="30" step="10" />
+
+  <label>Start Frame (optional)</label>
+  <div class="upload-group">
+    <button class="upload-btn" id="uploadStartBtn">Upload Start Frame</button>
+    <input type="file" id="startFile" accept="image/*" hidden />
+    <span id="startFileName" class="file-name">No file selected</span>
+  </div>
+
+  <label>End Frame (optional)</label>
+  <div class="upload-group">
+    <button class="upload-btn" id="uploadEndBtn">Upload End Frame</button>
+    <input type="file" id="endFile" accept="image/*" hidden />
+    <span id="endFileName" class="file-name">No file selected</span>
+  </div>
+
+  <label>Prompts (one per block, separated by blank line)</label>
+  <textarea id="prompts" placeholder="A cat jumping over the moon
+
+A robot dancing in neon city
+
+..."></textarea>
+
+  <div id="prompts-list-container">
+    <strong>Current Prompts (for copy-paste / review):</strong>
+    <ol id="prompts-list"></ol>
+  </div>
+
+  <div id="controls">
+    <button id="start">Start Batch</button>
+    <button id="stop" class="stop" disabled>Stop Batch</button>
+  </div>
+
+  <div id="status"></div>
+  <div id="batch-status"></div>
+
+  <script src="sidepanel.js"></script>
+</body>
+</html>
