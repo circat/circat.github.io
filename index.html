@@ -18,62 +18,124 @@
       margin: 0 auto;
       padding: 40px 20px;
     }
-    h1 { color: #7c3aed; text-align: center; }
-    h2 { color: #a78bfa; }
+    h1 { 
+      color: #7c3aed; 
+      text-align: center; 
+      margin-bottom: 8px;
+    }
+    .subtitle {
+      text-align: center;
+      font-size: 1.15rem;
+      color: #a78bfa;
+      margin-bottom: 40px;
+    }
     .btn {
       display: inline-block;
       background: linear-gradient(135deg, #7c3aed, #5b21b6);
       color: white;
-      padding: 14px 28px;
+      padding: 16px 32px;
       border-radius: 8px;
       text-decoration: none;
       font-weight: bold;
-      margin: 10px 0;
-      transition: all 0.2s;
+      font-size: 1.1rem;
+      margin: 20px 0;
+      transition: all 0.25s;
+      box-shadow: 0 4px 15px rgba(124, 58, 237, 0.35);
     }
-    .btn:hover { background: #5b21b6; transform: translateY(-2px); }
-    ul { padding-left: 20px; }
-    code { background: #1a1b2e; padding: 2px 6px; border-radius: 4px; }
-    pre { background: #1a1b2e; padding: 16px; border-radius: 8px; overflow-x: auto; font-size: 0.95rem; }
-    footer { margin-top: 80px; text-align: center; color: #666; font-size: 0.9rem; }
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(124, 58, 237, 0.5);
+    }
+    ul { 
+      padding-left: 24px; 
+      font-size: 1.05rem;
+    }
+    code { 
+      background: #1a1b2e; 
+      padding: 3px 7px; 
+      border-radius: 5px; 
+      font-family: 'Consolas', monospace;
+    }
+    .instructions ol {
+      counter-reset: step;
+      padding-left: 0;
+    }
+    .instructions li {
+      position: relative;
+      margin-bottom: 16px;
+      padding-left: 40px;
+    }
+    .instructions li:before {
+      content: counter(step);
+      counter-increment: step;
+      position: absolute;
+      left: 0;
+      top: 0;
+      background: #7c3aed;
+      color: white;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 28px;
+      font-weight: bold;
+    }
+    footer {
+      margin-top: 80px;
+      text-align: center;
+      color: #666;
+      font-size: 0.92rem;
+    }
   </style>
 </head>
 <body>
 
 <div class="container">
   <h1>Envato VideoGen Batch Extension</h1>
-  <p style="text-align:center; font-size:1.1rem;">Generate dozens or hundreds of short videos automatically on Envato Labs – free Chrome extension.</p>
+  <div class="subtitle">
+    Generate dozens or hundreds of short videos automatically on Envato Labs — free Chrome tool
+  </div>
 
   <h2>What it does</h2>
   <ul>
     <li>Paste multiple prompts at once (separated by blank lines)</li>
-    <li>Automatically fills prompt, clicks Generate, waits, downloads from history page</li>
-    <li>Optional global start/end frame images from your disk</li>
-    <li>Live preview of prompts as numbered list</li>
-    <li>Start / Stop controls in sidebar</li>
+    <li>Automatically fills each prompt, clicks Generate, waits, and downloads the finished video</li>
+    <li>Optional global start & end frame images (uploaded from your computer)</li>
+    <li>Live numbered preview of all prompts in the sidebar</li>
+    <li>Start / Stop controls — pause or cancel any time</li>
+    <li>Auto-handles navigation between generator and history page</li>
   </ul>
 
   <h2>How to install</h2>
-  <ol>
+  <ol class="instructions">
     <li>Open Chrome and go to <code>chrome://extensions/</code></li>
-    <li>Turn on <strong>Developer mode</strong> (top right toggle)</li>
+    <li>Turn on <strong>Developer mode</strong> (toggle in top right)</li>
     <li>Click <strong>Load unpacked</strong></li>
-    <li>Select the folder with your extension files</li>
-    <li>Go to <a href="https://labs.envato.com/video-gen" target="_blank">https://labs.envato.com/video-gen</a></li>
-    <li>Click the extension icon (puzzle piece) → sidebar opens on the right</li>
-    <li>Paste prompts, choose options, click Start Batch</li>
+    <li>Select the unzipped folder of the extension</li>
+    <li>Visit <a href="https://labs.envato.com/video-gen" target="_blank">https://labs.envato.com/video-gen</a></li>
+    <li>Click the puzzle icon (extensions) in the toolbar → find and open <strong>Envato VideoGen Batch</strong></li>
+    <li>The sidebar appears on the right — paste prompts, choose options, click Start Batch</li>
   </ol>
 
   <h2>Download the Extension</h2>
-  <p>Zip your extension folder and share it – or provide a direct link later.</p>
-  <a href="#" class="btn" onclick="alert('Download coming soon – check GitHub repo!')">Download ZIP (soon)</a>
+  <p>Download the ZIP file below, unzip it, and follow the installation steps above.</p>
+
+  <a href="https://drive.google.com/file/d/1QjI2k1tVn2oabZ1KJTDQeYLYP9BimTUt/view?usp=sharing" 
+     class="btn" 
+     target="_blank">
+    Download ZIP (v1.2)
+  </a>
 
   <h2>Source Code & Updates</h2>
-  <p>Full open-source code and updates:</p>
-  <p><a href="https://github.com/Circat/circat.github.io" target="_blank" style="color:#7c3aed; font-weight:bold;">github.com/Circat/circat.github.io</a></p>
+  <p>The complete open-source code is available here:</p>
+  <p>
+    <a href="https://github.com/Circat/circat.github.io" target="_blank" style="color:#7c3aed; font-weight:bold;">
+      github.com/Circat/circat.github.io
+    </a>
+  </p>
 
   <footer>
-    Created with ❤️ | February 2026 | No affiliation with Envato | For personal / educational use
+    Created with ❤️ | February 2026 | No official affiliation with Envato Labs | For personal & educational use only
   </footer>
 </div>
 
